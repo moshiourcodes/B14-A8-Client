@@ -1,8 +1,9 @@
-import { Button } from "@base-ui/react";
+import { Button } from "@/components/ui/button";
+
 
 
 export default function Home() {
   return (
-    <Button></Button>
+  <Button variant={"outline"}> shadcn button </Button>
   );
 }
