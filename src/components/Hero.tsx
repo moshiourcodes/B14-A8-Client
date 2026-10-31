@@ -1,10 +1,24 @@
 
+
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 
-const slides = [
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+
+interface Slide {
+  subtitle: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+const slides: Slide[] = [
   {
     subtitle: "BOOKNOOK",
     title: "Your neighbourhood library, online",
@@ -32,89 +46,114 @@ const slides = [
 ];
 
 export default function Hero() {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const handleHeroClick = (swiper: SwiperType) => {
+    swiper.slideNext();
+  };
 
   return (
-    <section className="relative h-120 min-h-105 w-full overflow-hidden bg-[#171b17] sm:h-130 lg:h-137.5 xl:h-145">
+    <section className="relative h-85 w-full overflow-hidden bg-[#171b17] sm:h-95 md:h-105 lg:h-112.5">
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade]}
+        slidesPerView={1}
+        effect="fade"
+        fadeEffect={{
+          crossFade: true,
+        }}
+        loop={true}
+        speed={800}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        className="booknook-swiper h-full w-full"
+        onClick={(swiper, event) => {
+          const target = event.target as HTMLElement;
 
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
-            activeSlide === index
-              ? "z-10 opacity-100"
-              : "z-0 opacity-0"
-          }`}
-          style={{
-            backgroundImage: `linear-gradient(
-              90deg,
-              rgba(0,0,0,0.78) 0%,
-              rgba(0,0,0,0.48) 50%,
-              rgba(0,0,0,0.15) 100%
-            ), url("${slide.image}")`,
-          }}
-          aria-hidden={activeSlide !== index}
-        >
-          {/* Content */}
-          <div className="mx-auto flex h-full w-full max-w-350 items-center px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+          // Don't change slide when clicking button or pagination
+          if (
+            target.closest("a") ||
+            target.closest("button") ||
+            target.closest(".swiper-pagination")
+          ) {
+            return;
+          }
+
+          handleHeroClick(swiper);
+        }}
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
             <div
-              className={`max-w-137.5 transition-all duration-700 ${
-                activeSlide === index
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-5 opacity-0"
-              }`}
+              className="flex h-full w-full cursor-pointer items-center bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `
+                  linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 0.80) 0%,
+                    rgba(0, 0, 0, 0.52) 50%,
+                    rgba(0, 0, 0, 0.18) 100%
+                  ),
+                  url("${slide.image}")
+                `,
+              }}
             >
-              <span className="mb-4 block text-[11px] font-bold tracking-[2px] text-[#d6a58c] sm:mb-5 sm:text-xs">
-                {slide.subtitle}
-              </span>
+              {/* Content */}
+              <div className="mx-auto flex h-full w-full max-w-350 items-center px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+                <div className="max-w-137.5">
+                  {/* Subtitle */}
+                  <span className="mb-2 block text-[10px] font-bold tracking-[2px] text-[#d6a58c] sm:mb-3 sm:text-xs">
+                    {slide.subtitle}
+                  </span>
 
-              <h1 className="mb-4 font-serif text-4xl font-bold leading-[1.2] text-white sm:mb-5 sm:text-5xl md:text-6xl lg:text-[64px]">
-                {slide.title}
-              </h1>
+                  {/* Title */}
+                  <h1 className="mb-3 font-serif text-3xl font-bold leading-[1.15] text-white sm:text-4xl md:text-5xl lg:text-6xl">
+                    {slide.title}
+                  </h1>
 
-              <p className="mb-6 max-w-125 text-sm leading-7 text-white/85 sm:mb-7 sm:text-base">
-                {slide.description}
-              </p>
+                  {/* Description */}
+                  <p className="mb-4 max-w-125 text-xs leading-6 text-white/85 sm:text-sm sm:leading-7 md:text-base">
+                    {slide.description}
+                  </p>
 
-              <Link
-                href="/books"
-                tabIndex={activeSlide === index ? 0 : -1}
-                className="inline-flex items-center justify-center rounded-md bg-[#a6d9ae] px-4 py-3 text-xs font-semibold text-[#183d29] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c1e8c7] sm:text-sm"
-              >
-                Browse Books
-              </Link>
+                  {/* Browse Books Button */}
+                  <Link
+                    href="/all-books"
+                    onClick={(event) => event.stopPropagation()}
+                    className="inline-flex items-center justify-center rounded-md bg-[#a6d9ae] px-4 py-2.5 text-xs font-semibold text-[#183d29] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c1e8c7] sm:px-5 sm:py-3 sm:text-sm"
+                  >
+                    Browse Books
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ))}
-
-      {/* Navigation dots */}
-      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveSlide(index)}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={activeSlide === index ? "true" : undefined}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              activeSlide === index
-                ? "w-2 bg-[#e9a17e]"
-                : "w-2 bg-white/50 hover:bg-white"
-            }`}
-          />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
+
+      {/* Swiper Pagination Styles */}
+      <style jsx global>{`
+        .booknook-swiper .swiper-pagination {
+          bottom: 14px !important;
+        }
+
+        .booknook-swiper .swiper-pagination-bullet {
+          width: 7px;
+          height: 7px;
+          background: white;
+          opacity: 0.5;
+          transition: all 0.3s ease;
+        }
+
+        .booknook-swiper .swiper-pagination-bullet-active {
+          width: 20px;
+          border-radius: 999px;
+          background: #a6d9ae;
+          opacity: 1;
+        }
+      `}</style>
     </section>
   );
 }
-
-
