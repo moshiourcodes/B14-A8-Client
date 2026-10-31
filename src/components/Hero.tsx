@@ -1,15 +1,11 @@
-
-
 "use client";
 
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
+import { Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 
 interface Slide {
   subtitle: string;
@@ -46,83 +42,60 @@ const slides: Slide[] = [
 ];
 
 export default function Hero() {
-  const handleHeroClick = (swiper: SwiperType) => {
-    swiper.slideNext();
-  };
-
   return (
-    <section className="relative h-85 w-full overflow-hidden bg-[#171b17] sm:h-95 md:h-105 lg:h-112.5">
+    <section className="relative h-105 w-full overflow-hidden bg-[#171b17] sm:h-120 md:h-137.5 lg:h-150">
       <Swiper
-        modules={[Autoplay, Pagination, EffectFade]}
+        modules={[Pagination]}
         slidesPerView={1}
-        effect="fade"
-        fadeEffect={{
-          crossFade: true,
-        }}
         loop={true}
         speed={800}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
         pagination={{
           clickable: true,
         }}
+        allowTouchMove={true}
+        simulateTouch={true}
+        grabCursor={true}
+        threshold={10}
+        touchStartPreventDefault={false}
         className="booknook-swiper h-full w-full"
-        onClick={(swiper, event) => {
-          const target = event.target as HTMLElement;
-
-          // Don't change slide when clicking button or pagination
-          if (
-            target.closest("a") ||
-            target.closest("button") ||
-            target.closest(".swiper-pagination")
-          ) {
-            return;
-          }
-
-          handleHeroClick(swiper);
-        }}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div
-              className="flex h-full w-full cursor-pointer items-center bg-cover bg-center bg-no-repeat"
+              className="flex h-full w-full items-center bg-cover bg-center bg-no-repeat"
               style={{
                 backgroundImage: `
                   linear-gradient(
                     90deg,
-                    rgba(0, 0, 0, 0.80) 0%,
-                    rgba(0, 0, 0, 0.52) 50%,
-                    rgba(0, 0, 0, 0.18) 100%
+                    rgba(0, 0, 0, 0.82) 0%,
+                    rgba(0, 0, 0, 0.55) 50%,
+                    rgba(0, 0, 0, 0.20) 100%
                   ),
                   url("${slide.image}")
                 `,
               }}
             >
-              {/* Content */}
               <div className="mx-auto flex h-full w-full max-w-350 items-center px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-                <div className="max-w-137.5">
+                <div className="max-w-162.5">
                   {/* Subtitle */}
-                  <span className="mb-2 block text-[10px] font-bold tracking-[2px] text-[#d6a58c] sm:mb-3 sm:text-xs">
+                  <span className="mb-3 block text-xs font-bold tracking-[3px] text-[#d6a58c] sm:text-sm">
                     {slide.subtitle}
                   </span>
 
                   {/* Title */}
-                  <h1 className="mb-3 font-serif text-3xl font-bold leading-[1.15] text-white sm:text-4xl md:text-5xl lg:text-6xl">
+                  <h1 className="mb-4 font-serif text-4xl font-bold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-7xl">
                     {slide.title}
                   </h1>
 
                   {/* Description */}
-                  <p className="mb-4 max-w-125 text-xs leading-6 text-white/85 sm:text-sm sm:leading-7 md:text-base">
+                  <p className="mb-6 max-w-150 text-sm leading-7 text-white/85 sm:text-base sm:leading-8 md:text-lg">
                     {slide.description}
                   </p>
 
                   {/* Browse Books Button */}
                   <Link
                     href="/all-books"
-                    onClick={(event) => event.stopPropagation()}
-                    className="inline-flex items-center justify-center rounded-md bg-[#a6d9ae] px-4 py-2.5 text-xs font-semibold text-[#183d29] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c1e8c7] sm:px-5 sm:py-3 sm:text-sm"
+                    className="inline-flex items-center justify-center rounded-2xl bg-[#a6d9ae] px-5 py-3 text-sm font-semibold text-[#183d29] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c1e8c7] sm:px-6 sm:py-3.5 sm:text-base"
                   >
                     Browse Books
                   </Link>
@@ -133,25 +106,33 @@ export default function Hero() {
         ))}
       </Swiper>
 
-      {/* Swiper Pagination Styles */}
-      <style jsx global>{`
+      {/* Pagination Styling */}
+      <style>{`
         .booknook-swiper .swiper-pagination {
-          bottom: 14px !important;
+          bottom: 20px !important;
         }
 
         .booknook-swiper .swiper-pagination-bullet {
-          width: 7px;
-          height: 7px;
+          width: 8px;
+          height: 8px;
           background: white;
           opacity: 0.5;
           transition: all 0.3s ease;
         }
 
         .booknook-swiper .swiper-pagination-bullet-active {
-          width: 20px;
+          width: 24px;
           border-radius: 999px;
           background: #a6d9ae;
           opacity: 1;
+        }
+
+        .booknook-swiper {
+          cursor: grab;
+        }
+
+        .booknook-swiper:active {
+          cursor: grabbing;
         }
       `}</style>
     </section>

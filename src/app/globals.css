@@ -2,3 +2,24 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  transition: background-color 0.3s ease;
+}
+
+body {
+  background-color: white;
+  color: #111827;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0b1510;
+  color: white;
+}
