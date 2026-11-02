@@ -18,8 +18,7 @@ const steps = [
   {
     number: "Step 3",
     title: "Return it",
-    description:
-      "Done reading? Return it from My Borrows in one click.",
+    description: "Done reading? Return it from My Borrows in one click.",
     icon: RotateCcw,
   },
 ];
@@ -28,8 +27,6 @@ export default function HowBorrowingWorks() {
   return (
     <section className="w-full bg-[#15271d] py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-275 px-5 sm:px-8 lg:px-10">
-        
-      
         <div className="mb-8 text-center sm:mb-10">
           <h2 className="font-serif text-2xl font-bold text-[#f5f1e8] sm:text-3xl">
             How Borrowing Works
@@ -40,7 +37,6 @@ export default function HowBorrowingWorks() {
           </p>
         </div>
 
-   
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
           {steps.map((step) => {
             const Icon = step.icon;
@@ -50,13 +46,8 @@ export default function HowBorrowingWorks() {
                 key={step.number}
                 className="rounded-sm border border-[#24402f] bg-[#112219] px-5 py-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#3c6248]"
               >
-           
                 <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#9bd7a6]">
-                  <Icon
-                    size={19}
-                    strokeWidth={2}
-                    className="text-[#183525]"
-                  />
+                  <Icon size={19} strokeWidth={2} className="text-[#183525]" />
                 </div>
 
                 {/* Step Number */}
