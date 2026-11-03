@@ -7,25 +7,15 @@
 //   category: string;
 // };
 
-// const BookCard = ({
-//   image,
-//   title,
-//   author,
-//   category,
-// }: BookCardProps) => {
+// const BookCard = ({ image, title, author, category }: BookCardProps) => {
 //   return (
 //     <div className="overflow-hidden rounded-md border border-[#2a3931] bg-[#14211a]">
 //       {/* Book Image */}
-//       <div className="relative aspect-[3/4] w-full">
-//         <Image
-//           src={image}
-//           alt={title}
-//           fill
-//           className="object-cover"
-//         />
+//       <div className="relative aspect-3/4 w-full overflow-hidden">
+//         <Image src={image} alt={title} fill className="object-cover" />
 //       </div>
 
-//       {/* Card Content */}
+//       {/* Book Information */}
 //       <div className="p-3">
 //         <span className="rounded-full bg-[#203329] px-2 py-1 text-[10px] text-[#c5c9c3]">
 //           {category}
@@ -35,9 +25,7 @@
 //           {title}
 //         </h3>
 
-//         <p className="mt-1 truncate text-xs text-[#aaa9a2]">
-//           by {author}
-//         </p>
+//         <p className="mt-1 truncate text-xs text-[#aaa9a2]">by {author}</p>
 
 //         <button className="mt-3 w-full rounded-md bg-[#92d19f] py-2 text-xs font-medium text-[#10251a] transition hover:bg-[#a8d9b5]">
 //           View Details
@@ -53,50 +41,41 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 import Image from "next/image";
 
-type BookCardProps = {
-  image: string;
+interface BookCardProps {
   title: string;
   author: string;
   category: string;
-};
+  image: string;
+}
 
-const BookCard = ({
-  image,
+export default function BookCard({
   title,
   author,
   category,
-}: BookCardProps) => {
+  image,
+}: BookCardProps) {
   return (
     <div className="overflow-hidden rounded-md border border-[#2a3931] bg-[#14211a]">
       {/* Book Image */}
-      <div className="relative aspect-3/4 w-full overflow-hidden">
+      <div className="relative aspect-3/4 w-full">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
         />
       </div>
 
       {/* Book Information */}
       <div className="p-3">
-        <span className="rounded-full bg-[#203329] px-2 py-1 text-[10px] text-[#c5c9c3]">
+        <span className="rounded-full bg-[#213329] px-2 py-1 text-[10px] text-[#d5d8d2]">
           {category}
         </span>
 
-        <h3 className="mt-3 truncate text-sm font-semibold text-[#f4f1eb]">
+        <h3 className="mt-3 truncate font-semibold text-[#f4f1eb]">
           {title}
         </h3>
 
@@ -104,12 +83,10 @@ const BookCard = ({
           by {author}
         </p>
 
-        <button className="mt-3 w-full rounded-md bg-[#92d19f] py-2 text-xs font-medium text-[#10251a] transition hover:bg-[#a8d9b5]">
+        <button className="mt-3 w-full rounded-md bg-[#92d19f] px-3 py-2 text-xs font-medium text-[#10251a] transition hover:bg-[#a8d9b5]">
           View Details
         </button>
       </div>
     </div>
   );
-};
-
-export default BookCard;
+}

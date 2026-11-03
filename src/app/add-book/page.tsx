@@ -1,6 +1,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 const AddBookPage = () => {
@@ -25,7 +26,7 @@ const AddBookPage = () => {
     <main className="min-h-screen bg-[#08120d] text-[#f4f1eb]">
       {/* Header */}
       <section className="border-b border-[#2d3b33] bg-[#14211a]">
-        <div className="flex h-[205px] flex-col items-center justify-center px-4">
+        <div className="flex h-51.25 flex-col items-center justify-center px-4">
           <h1 className="font-serif text-[48px] font-bold leading-none md:text-[52px]">
             Add a Book
           </h1>
@@ -86,7 +87,7 @@ const AddBookPage = () => {
                 <select
                   id="category"
                   defaultValue="Fiction"
-                  className="h-[44px] w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none focus:border-[#92d19f]"
+                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none focus:border-[#92d19f]"
                 >
                   <option>Fiction</option>
                   <option>History</option>
@@ -111,7 +112,7 @@ const AddBookPage = () => {
                   min="1"
                   defaultValue="1"
                   required
-                  className="h-[44px] w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-white outline-none focus:border-[#92d19f]"
+                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-white outline-none focus:border-[#92d19f]"
                 />
               </div>
             </div>
@@ -130,14 +131,14 @@ const AddBookPage = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="h-[44px] w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-3 py-2 text-[17px] text-[#f4f1eb]"
+                className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-3 py-2 text-[17px] text-[#f4f1eb]"
               />
 
               {imagePreview && (
-                <img
+                <Image
                   src={imagePreview}
                   alt="Book preview"
-                  className="mt-4 h-[250px] w-[180px] rounded-lg border border-[#3a4940] object-cover"
+                  className="mt-4 h-62.5 w-45 rounded-lg border border-[#3a4940] object-cover"
                 />
               )}
             </div>
@@ -153,7 +154,7 @@ const AddBookPage = () => {
 
               <textarea
                 id="description"
-                className="h-[85px] w-full resize-none rounded-xl border border-[#3a4940] bg-[#14211a] px-4 py-3 text-[17px] text-white outline-none focus:border-[#92d19f]"
+                className="h-21.25 w-full resize-none rounded-xl border border-[#3a4940] bg-[#14211a] px-4 py-3 text-[17px] text-white outline-none focus:border-[#92d19f]"
               />
             </div>
 
@@ -171,7 +172,7 @@ const AddBookPage = () => {
                   id="username"
                   type="text"
                   defaultValue="Moshiour Rahman"
-                  className="h-[44px] w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none"
+                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none"
                 />
               </div>
 
@@ -187,7 +188,7 @@ const AddBookPage = () => {
                   id="email"
                   type="email"
                   defaultValue="rmoshiour32@gmail.com"
-                  className="h-[44px] w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none"
+                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none"
                 />
               </div>
             </div>
@@ -195,7 +196,7 @@ const AddBookPage = () => {
             {/* Add Button */}
             <button
               type="submit"
-              className="mt-7 h-[47px] w-full rounded-xl bg-[#92d19f] text-[18px] font-medium text-[#10251a] transition hover:bg-[#a8d9b5]"
+              className="mt-7 h-11 w-full rounded-xl bg-[#92d19f] text-[18px] font-medium text-[#10251a] transition hover:bg-[#a8d9b5]"
             >
               Add Book
             </button>

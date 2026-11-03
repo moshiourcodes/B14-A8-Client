@@ -1,5 +1,6 @@
 import BookCard from "@/components/BookCard";
 import { books } from "@/data/books";
+import { Key } from "react";
 
 export default function AllBooksPage() {
   return (
@@ -16,7 +17,7 @@ export default function AllBooksPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {books.map((book) => (
+          {books.map((book: { id: Key | null | undefined; image: string; title: string; author: string; category: string; }) => (
             <BookCard
               key={book.id}
               image={book.image}
