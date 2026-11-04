@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -17,36 +16,34 @@ const AddBookPage = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // API will be added later
     alert("Book added successfully!");
   };
 
   return (
-    <main className="min-h-screen bg-[#08120d] text-[#f4f1eb]">
+    <main className="min-h-screen bg-[#0d1711] text-[#f4f1eb]">
       {/* Header */}
-      <section className="border-b border-[#2d3b33] bg-[#14211a]">
-        <div className="flex h-51.25 flex-col items-center justify-center px-4">
-          <h1 className="font-serif text-[48px] font-bold leading-none md:text-[52px]">
+      <section className="h-41.5 border-b border-[#344039] bg-[#19241e]">
+        <div className="flex h-full flex-col items-center justify-center px-4">
+          <h1 className="font-serif text-[36px] font-bold leading-tight">
             Add a Book
           </h1>
 
-          <p className="mt-5 text-[20px] text-[#aaa9a2]">
+          <p className="mt-2 text-center text-[16px] text-[#aaa9a2]">
             Put a book from your shelf into the library.
           </p>
         </div>
       </section>
 
       {/* Form Section */}
-      <section className="px-4 py-16">
-        <div className="mx-auto w-full max-w-245">
+      <section className="px-4 pb-16 pt-11">
+        <div className="mx-auto w-full max-w-184">
           <form onSubmit={handleSubmit}>
             {/* Book Title + Author */}
-            <div className="grid grid-cols-1 gap-x-7 gap-y-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-x-5 gap-y-4.25 md:grid-cols-2">
               <div>
                 <label
                   htmlFor="title"
-                  className="mb-2 block text-[17px] font-medium"
+                  className="mb-1.5 block text-[14px] font-medium"
                 >
                   Book Title
                 </label>
@@ -55,14 +52,14 @@ const AddBookPage = () => {
                   id="title"
                   type="text"
                   required
-                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-white outline-none focus:border-[#92d19f]"
+                  className="h-8.25 w-full rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 text-[14px] text-white outline-none transition focus:border-[#92d19f]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="author"
-                  className="mb-2 block text-[17px] font-medium"
+                  className="mb-1.5 block text-[14px] font-medium"
                 >
                   Author Name
                 </label>
@@ -71,7 +68,7 @@ const AddBookPage = () => {
                   id="author"
                   type="text"
                   required
-                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-white outline-none focus:border-[#92d19f]"
+                  className="h-8.25 w-full rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 text-[14px] text-white outline-none transition focus:border-[#92d19f]"
                 />
               </div>
 
@@ -79,7 +76,7 @@ const AddBookPage = () => {
               <div>
                 <label
                   htmlFor="category"
-                  className="mb-2 block text-[17px] font-medium"
+                  className="mb-1.5 block text-[14px] font-medium"
                 >
                   Category
                 </label>
@@ -87,7 +84,7 @@ const AddBookPage = () => {
                 <select
                   id="category"
                   defaultValue="Fiction"
-                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none focus:border-[#92d19f]"
+                  className="h-8.25 w-full rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 text-[14px] text-[#f4f1eb] outline-none focus:border-[#92d19f]"
                 >
                   <option>Fiction</option>
                   <option>History</option>
@@ -101,7 +98,7 @@ const AddBookPage = () => {
               <div>
                 <label
                   htmlFor="copies"
-                  className="mb-2 block text-[17px] font-medium"
+                  className="mb-1.5 block text-[14px] font-medium"
                 >
                   Total Copies
                 </label>
@@ -112,16 +109,16 @@ const AddBookPage = () => {
                   min="1"
                   defaultValue="1"
                   required
-                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-white outline-none focus:border-[#92d19f]"
+                  className="h-8.25 w-full rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 text-[14px] text-white outline-none focus:border-[#92d19f]"
                 />
               </div>
             </div>
 
             {/* Book Image */}
-            <div className="mt-8">
+            <div className="mt-6">
               <label
                 htmlFor="image"
-                className="mb-2 block text-[17px] font-medium"
+                className="mb-1.5 block text-[14px] font-medium"
               >
                 Book Image
               </label>
@@ -131,39 +128,42 @@ const AddBookPage = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-3 py-2 text-[17px] text-[#f4f1eb]"
+                className="h-8.25 w-full cursor-pointer rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 py-1.25 text-[14px] text-[#f4f1eb] file:mr-1 file:cursor-pointer file:border-0 file:bg-transparent file:text-[14px] file:text-[#f4f1eb]"
               />
 
               {imagePreview && (
                 <Image
                   src={imagePreview}
+                  width={200}
+                  height={250}
+                  unoptimized
                   alt="Book preview"
-                  className="mt-4 h-62.5 w-45 rounded-lg border border-[#3a4940] object-cover"
+                  className="mt-3 h-45 w-32.5 rounded-lg border border-[#414b45] object-cover"
                 />
               )}
             </div>
 
             {/* Description */}
-            <div className="mt-8">
+            <div className="mt-4.5">
               <label
                 htmlFor="description"
-                className="mb-2 block text-[17px] font-medium"
+                className="mb-1.5 block text-[14px] font-medium"
               >
                 Short Description
               </label>
 
               <textarea
                 id="description"
-                className="h-21.25 w-full resize-none rounded-xl border border-[#3a4940] bg-[#14211a] px-4 py-3 text-[17px] text-white outline-none focus:border-[#92d19f]"
+                className="h-16 w-full resize-y rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 py-2 text-[14px] text-white outline-none focus:border-[#92d19f]"
               />
             </div>
 
             {/* User Name + Email */}
-            <div className="mt-7 grid grid-cols-1 gap-x-7 gap-y-6 md:grid-cols-2">
+            <div className="mt-4.25 grid grid-cols-1 gap-x-5 gap-y-4.25 md:grid-cols-2">
               <div>
                 <label
                   htmlFor="username"
-                  className="mb-2 block text-[17px] font-medium"
+                  className="mb-1.5 block text-[14px] font-medium"
                 >
                   User Name
                 </label>
@@ -172,14 +172,14 @@ const AddBookPage = () => {
                   id="username"
                   type="text"
                   defaultValue="Moshiour Rahman"
-                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none"
+                  className="h-8.25 w-full rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 text-[14px] text-[#f4f1eb] outline-none focus:border-[#92d19f]"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-[17px] font-medium"
+                  className="mb-1.5 block text-[14px] font-medium"
                 >
                   User Email
                 </label>
@@ -188,7 +188,7 @@ const AddBookPage = () => {
                   id="email"
                   type="email"
                   defaultValue="rmoshiour32@gmail.com"
-                  className="h-11 w-full rounded-xl border border-[#3a4940] bg-[#14211a] px-4 text-[17px] text-[#f4f1eb] outline-none"
+                  className="h-8.25 w-full rounded-[9px] border border-[#414b45] bg-[#1c2520] px-2.5 text-[14px] text-[#f4f1eb] outline-none focus:border-[#92d19f]"
                 />
               </div>
             </div>
@@ -196,7 +196,7 @@ const AddBookPage = () => {
             {/* Add Button */}
             <button
               type="submit"
-              className="mt-7 h-11 w-full rounded-xl bg-[#92d19f] text-[18px] font-medium text-[#10251a] transition hover:bg-[#a8d9b5]"
+              className="mt-5.25 h-8.75 w-full rounded-lg bg-[#92cba0] text-[14px] font-medium text-[#10251a] transition hover:bg-[#a8d9b5]"
             >
               Add Book
             </button>
