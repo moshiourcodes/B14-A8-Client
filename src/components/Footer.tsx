@@ -7,10 +7,10 @@ import { FaXTwitter, FaFacebookF, FaInstagram } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer className="w-full bg-[#0b1510] text-gray-300 border-t border-[#26372c]">
-      {/* Main Footer */}
+      
       <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-16 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
-          {/* Brand Section */}
+          
           <div className="space-y-4">
             <Link href="/" className="inline-flex items-center gap-3">
               <div className="w-11 h-11 rounded-xl bg-[#a8d9b5] flex items-center justify-center">
@@ -32,7 +32,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Contact Section */}
+          
           <div className="space-y-5">
             <h3 className="text-xl font-bold text-white">Contact</h3>
 
@@ -60,7 +60,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Social Media Section */}
+        
           <div className="space-y-5">
             <h3 className="text-xl font-bold text-white">Follow us</h3>
 

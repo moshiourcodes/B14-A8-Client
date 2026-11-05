@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -51,9 +49,7 @@ export default function Hero() {
   console.log(setMounted);
 
   // Initialize Swiper only after the component mounts in browser
-  useEffect(() => {
-  
-  }, []);
+  useEffect(() => {}, []);
 
   const renderSlideContent = (slide: Slide) => (
     <div
@@ -72,30 +68,24 @@ export default function Hero() {
     >
       <div className="mx-auto flex h-full w-full max-w-350 items-center px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20">
         <div className="max-w-162.5">
-
-          {/* Subtitle */}
           <span className="mb-3 block text-xs font-bold tracking-[3px] text-[#d6a58c] sm:text-sm">
             {slide.subtitle}
           </span>
 
-          {/* Title */}
           <h1 className="mb-4 font-serif text-4xl font-bold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {slide.title}
           </h1>
 
-          {/* Description */}
           <p className="mb-6 max-w-150 text-sm leading-7 text-white/85 sm:text-base sm:leading-8 md:text-lg">
             {slide.description}
           </p>
 
-          {/* Browse Books */}
           <Link
             href="/all-books"
             className="inline-flex items-center justify-center rounded-2xl bg-[#a6d9ae] px-5 py-3 text-sm font-semibold text-[#183d29] transition-all duration-300 hover:-translate-y-1 hover:bg-[#c1e8c7] sm:px-6 sm:py-3.5 sm:text-base"
           >
             Browse Books
           </Link>
-
         </div>
       </div>
     </div>
@@ -103,7 +93,6 @@ export default function Hero() {
 
   return (
     <section className="relative h-105 w-full overflow-hidden bg-[#171b17] sm:h-120 md:h-137.5 lg:h-150">
-
       {mounted ? (
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -126,17 +115,12 @@ export default function Hero() {
           className="booknook-swiper h-full w-full"
         >
           {slides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              {renderSlideContent(slide)}
-            </SwiperSlide>
+            <SwiperSlide key={index}>{renderSlideContent(slide)}</SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        // Server and initial client render the same static slide
         renderSlideContent(slides[0])
       )}
-
     </section>
   );
 }
-
