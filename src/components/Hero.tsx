@@ -46,10 +46,11 @@ const slides: Slide[] = [
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
-  console.log(setMounted);
-
-  // Initialize Swiper only after the component mounts in browser
-  useEffect(() => {}, []);
+  // Initialize Swiper after component mounts
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const renderSlideContent = (slide: Slide) => (
     <div
@@ -97,21 +98,30 @@ export default function Hero() {
         <Swiper
           modules={[Pagination, Autoplay]}
           slidesPerView={1}
+          spaceBetween={0}
           loop={true}
           speed={800}
+          // Autoplay
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
-            pauseOnMouseEnter: true,
+            pauseOnMouseEnter: false,
+            waitForTransition: true,
           }}
+          // Pagination
           pagination={{
             clickable: true,
           }}
+          // Drag and Swipe
           allowTouchMove={true}
           simulateTouch={true}
           grabCursor={true}
-          threshold={10}
+          threshold={5}
+          touchRatio={1}
+          touchAngle={45}
           touchStartPreventDefault={false}
+          preventClicks={true}
+          preventClicksPropagation={true}
           className="booknook-swiper h-full w-full"
         >
           {slides.map((slide, index) => (

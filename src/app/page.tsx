@@ -1,12 +1,12 @@
 import Link from "next/link";
-import BookCard from "@/components/BookCard";
+
 import Hero from "@/components/Hero";
 import HowBorrowingWorks from "@/components/HowBorrowingWorks";
 import TopCategories from "@/components/TopCategories";
-import { books } from "@/data/books";
+
 
 export default function Home() {
-  const newArrivals = books.slice(0, 10);
+  
 
   return (
     <div>
@@ -24,17 +24,6 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {newArrivals.map((book) => (
-              <BookCard
-                key={book.id}
-                image={book.image}
-                title={book.title}
-                author={book.author}
-                category={book.category}
-              />
-            ))}
-          </div>
 
           <div className="mt-8 flex justify-center">
             <Link
