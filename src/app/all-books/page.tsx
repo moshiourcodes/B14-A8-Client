@@ -1,34 +1,10 @@
-// import React from 'react';
-
-// const AllBookPage = async() => {
-//   const res = await fetch("http://localhost:5000/books")
-//   const data = await res.json()
-//   console.log(data)
-//   return (
-//     <div>
-      
-//     </div>
-//   );
-// };
-
-// export default AllBookPage; 
-
-
-
-
-
-
-
-
-
-
-
 
 
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Book {
   _id: string;
@@ -109,7 +85,7 @@ export default function AllBooksPage() {
 
         {/* Loading */}
         {loading && (
-          <div className="flex min-h-[300px] items-center justify-center">
+          <div className="flex min-h-75 items-center justify-center">
             <p className="text-lg text-[#92cba0]">
               Loading books...
             </p>
@@ -118,7 +94,7 @@ export default function AllBooksPage() {
 
         {/* Error */}
         {!loading && error && (
-          <div className="flex min-h-[300px] flex-col items-center justify-center gap-4">
+          <div className="flex min-h-75 flex-col items-center justify-center gap-4">
             <p className="text-center text-red-400">
               {error}
             </p>
@@ -134,7 +110,7 @@ export default function AllBooksPage() {
 
         {/* Empty Books */}
         {!loading && !error && books.length === 0 && (
-          <div className="flex min-h-[300px] items-center justify-center">
+          <div className="flex min-h-75 items-center justify-center">
             <p className="text-[#aaa9a2]">
               No books found.
             </p>
@@ -151,9 +127,11 @@ export default function AllBooksPage() {
                 className="group overflow-hidden rounded-md border border-[#303a33] bg-[#17231c] transition-all duration-300 hover:-translate-y-1 hover:border-[#92cba0]/60"
               >
                 {/* Book Image */}
-                <div className="h-[220px] w-full overflow-hidden bg-[#202923] sm:h-[250px] md:h-[280px]">
+                <div className="h-55 w-full overflow-hidden bg-[#202923] sm:h-62.5 md:h-70">
                   {book.image ? (
-                    <img
+                    <Image
+                        width={20}
+                        height={20}
                       src={book.image}
                       alt={book.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
