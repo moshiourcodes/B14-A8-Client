@@ -50,12 +50,12 @@ const Footer = () => {
                 className="flex items-center gap-3 text-sm text-gray-400 hover:text-[#a8d9b5] transition-colors"
               >
                 <Phone size={19} />
-                <span>+880 1700 000 000</span>
+                <span>+880 1234 567890</span>
               </a>
 
               <div className="flex items-center gap-3 text-sm text-gray-400">
                 <MapPin size={19} />
-                <span>12 Reading Lane, Dhaka</span>
+                <span>20 library Lane, Dhaka</span>
               </div>
             </div>
           </div>
