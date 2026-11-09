@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -49,9 +47,7 @@ export default function AllBooksPage() {
       } catch (error) {
         console.error("Error fetching books:", error);
         setError(
-          error instanceof Error
-            ? error.message
-            : "Something went wrong!"
+          error instanceof Error ? error.message : "Something went wrong!",
         );
       } finally {
         setLoading(false);
@@ -64,7 +60,6 @@ export default function AllBooksPage() {
   return (
     <main className="min-h-screen bg-[#0d1711] px-4 py-10 text-[#f4f1eb] sm:px-6 lg:px-10">
       <div className="mx-auto max-w-[1600px]">
-
         {/* Header */}
         <div className="mb-10 text-center">
           <h1 className="font-serif text-3xl font-bold sm:text-4xl md:text-5xl">
@@ -86,18 +81,14 @@ export default function AllBooksPage() {
         {/* Loading */}
         {loading && (
           <div className="flex min-h-75 items-center justify-center">
-            <p className="text-lg text-[#92cba0]">
-              Loading books...
-            </p>
+            <p className="text-lg text-[#92cba0]">Loading books...</p>
           </div>
         )}
 
         {/* Error */}
         {!loading && error && (
           <div className="flex min-h-75 flex-col items-center justify-center gap-4">
-            <p className="text-center text-red-400">
-              {error}
-            </p>
+            <p className="text-center text-red-400">{error}</p>
 
             <button
               onClick={() => window.location.reload()}
@@ -111,16 +102,13 @@ export default function AllBooksPage() {
         {/* Empty Books */}
         {!loading && !error && books.length === 0 && (
           <div className="flex min-h-75 items-center justify-center">
-            <p className="text-[#aaa9a2]">
-              No books found.
-            </p>
+            <p className="text-[#aaa9a2]">No books found.</p>
           </div>
         )}
 
         {/* Books Grid */}
         {!loading && !error && books.length > 0 && (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-5">
-
             {books.map((book) => (
               <div
                 key={book._id}
@@ -130,8 +118,8 @@ export default function AllBooksPage() {
                 <div className="h-55 w-full overflow-hidden bg-[#202923] sm:h-62.5 md:h-70">
                   {book.image ? (
                     <Image
-                        width={20}
-                        height={20}
+                      width={20}
+                      height={20}
                       src={book.image}
                       alt={book.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -145,7 +133,6 @@ export default function AllBooksPage() {
 
                 {/* Book Information */}
                 <div className="flex min-w-0 flex-col p-2.5">
-
                   {/* Category */}
                   <span className="mb-2 w-fit rounded-full bg-[#26342b] px-2 py-0.5 text-[9px] text-[#c5d6c8]">
                     {book.category}
@@ -174,14 +161,11 @@ export default function AllBooksPage() {
                   >
                     View Details
                   </Link>
-
                 </div>
               </div>
             ))}
-
           </div>
         )}
-
       </div>
     </main>
   );

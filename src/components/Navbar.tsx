@@ -14,7 +14,7 @@ const navLinks = [
 ];
 
 type User = {
-  _id: string;
+  _id?: string;
   name: string;
   email: string;
   photoURL?: string;
@@ -39,7 +39,15 @@ const Navbar = () => {
       }
 
       try {
-        setUser(JSON.parse(savedUser));
+        const parsedUser: User = JSON.parse(savedUser);
+
+        if (!parsedUser.name || !parsedUser.email) {
+          localStorage.removeItem("booknook-user");
+          setUser(null);
+          return;
+        }
+
+        setUser(parsedUser);
       } catch {
         localStorage.removeItem("booknook-user");
         setUser(null);
@@ -56,6 +64,14 @@ const Navbar = () => {
       window.removeEventListener("storage", loadUser);
     };
   }, []);
+
+  // Show all links when logged in.
+  // Show only Home and All Books when logged out.
+  const visibleNavLinks = user
+    ? navLinks
+    : navLinks.filter(
+        (link) => link.href === "/" || link.href === "/all-books",
+      );
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -79,15 +95,16 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#26372c] bg-[#0b1510]">
       <nav className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
-        <div className="flex h-22 items-center justify-between">
+        <div className="flex h-[88px] items-center justify-between">
           {/* LOGO + DESKTOP NAVIGATION */}
           <div className="flex items-center">
+            {/* LOGO */}
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
               className="flex shrink-0 items-center gap-3"
             >
-              <div className="flex h-13.5 w-13.5 items-center justify-center rounded-xl bg-[#9bd3a9]">
+              <div className="flex h-[54px] w-[54px] items-center justify-center rounded-xl bg-[#9bd3a9]">
                 <BookOpen
                   size={28}
                   strokeWidth={2.2}
@@ -100,8 +117,9 @@ const Navbar = () => {
               </span>
             </Link>
 
+            {/* DESKTOP NAVIGATION */}
             <div className="ml-8 hidden items-center gap-6 lg:ml-12 lg:flex xl:ml-16 xl:gap-10">
-              {navLinks.map((link) => (
+              {visibleNavLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
@@ -131,7 +149,6 @@ const Navbar = () => {
             {user ? (
               /* LOGGED-IN PROFILE */
               <div className="relative">
-                {/* PROFILE PHOTO */}
                 <button
                   type="button"
                   onClick={() => setProfileOpen((prev) => !prev)}
@@ -141,41 +158,43 @@ const Navbar = () => {
                 >
                   {user.photoURL ? (
                     <img
+                      width={56}
+                      height={56}
                       src={user.photoURL}
                       alt={user.name}
-                      className="h-19 w-[76px] rounded-full border-4 border-[#344f3a] object-cover"
+                      className="h-14 w-14 rounded-full border-4 border-[#344f3a] object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
                   ) : (
-                    <div className="flex h-19 w-19 items-center justify-center rounded-full border-4 border-[#344f3a] bg-[#202b25]">
-                      <UserRound size={32} />
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-[#344f3a] bg-[#202b25]">
+                      <UserRound size={32} className="text-[#f4f1eb]" />
                     </div>
                   )}
                 </button>
 
                 {/* PROFILE DROPDOWN */}
                 {profileOpen && (
-                  <div className="absolute right-0 top-20.5 z-50 w-105 max-w-[calc(100vw-32px)] overflow-hidden rounded-2xl border border-[#303a33] bg-[#17231c] shadow-xl">
-                    {/* USER NAME */}
+                  <div className="absolute right-0 top-[68px] z-50 w-[360px] max-w-[calc(100vw-32px)] overflow-hidden rounded-2xl border border-[#303a33] bg-[#17231c] shadow-xl">
                     <div className="border-b border-[#303a33] px-5 py-4">
-                      <p className="truncate text-[24px] font-medium text-[#aaa9a2]">
+                      <p className="truncate text-[20px] font-medium text-[#aaa9a2]">
                         {user.name}
                       </p>
                     </div>
 
-                    {/* MY PROFILE */}
                     <Link
                       href="/my-profile"
                       onClick={() => setProfileOpen(false)}
-                      className="block px-5 py-4 text-[26px] text-[#f4f1eb] transition hover:bg-[#26372c]"
+                      className="block px-5 py-4 text-xl text-[#f4f1eb] transition hover:bg-[#26372c]"
                     >
                       My Profile
                     </Link>
 
-                    {/* LOGOUT */}
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className="block w-full px-5 py-4 text-left text-[26px] text-[#f4f1eb] transition hover:bg-[#26372c]"
+                      className="block w-full px-5 py-4 text-left text-xl text-[#f4f1eb] transition hover:bg-[#26372c]"
                     >
                       Logout
                     </button>
@@ -235,18 +254,25 @@ const Navbar = () => {
                   <img
                     src={user.photoURL}
                     alt={user.name}
+                    width={48}
+                    height={48}
                     className="h-12 w-12 rounded-full border-2 border-[#344f3a] object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
                   />
                 ) : (
-                  <UserRound size={38} />
+                  <UserRound size={38} className="text-[#f4f1eb]" />
                 )}
 
-                <p className="truncate text-sm font-semibold">{user.name}</p>
+                <p className="truncate text-sm font-semibold text-[#f4f1eb]">
+                  {user.name}
+                </p>
               </div>
             )}
 
-            {/* NAVIGATION LINKS */}
-            {navLinks.map((link) => (
+            {/* MOBILE NAVIGATION LINKS */}
+            {visibleNavLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
