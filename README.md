@@ -90,6 +90,10 @@ POST /api/books/:id/borrow-এ লগইন করা session প্রয়োজ
 POST /api/books/:id/return সক্রিয় borrow যাচাই করে, Books backend-এর DELETE /borrowed-books/:id endpoint-এ copy ফেরত দেওয়ার request পাঠায় এবং backend সফল হলে borrow record মুছে দেয়।
 PATCH ও DELETE /api/my-books/:id-এ লগইন করা সদস্য বইটির মালিক কি না যাচাই করা হয়। PATCH ধার নেওয়া copy-র সংখ্যা অক্ষুণ্ণ রেখে update করে। কোনো copy ধার দেওয়া থাকলে DELETE বন্ধ থাকে।
 ইমেইল/পাসওয়ার্ডে নিবন্ধনের password কমপক্ষে ছয় অক্ষরের হতে হবে এবং তাতে অন্তত একটি uppercase ও একটি lowercase letter থাকতে হবে।
+
+
+
+
 📁 Project-এর কাঠামো
 src/
   app/
@@ -104,8 +108,13 @@ src/
     my-borrows/          ধার নেওয়া বইয়ের তালিকা ও return action
     profile/             Account ও সংযুক্ত social provider
     privacy-policy/      Privacy Policy পৃষ্ঠা
-    register/            নিবন্ধন পৃষ্ঠা
-    terms-of-service/     Terms of Service পৃষ্ঠা
+    register/            নিবন্ধন পৃষ্
+    ঠা
+    terms-of-service/     Terms of Service পৃষ্ঠা 
+
+
+
+    
   components/
     auth/                Authentication form ও route protection
     books/               পুনর্ব্যবহারযোগ্য book card
@@ -115,6 +124,8 @@ src/
     theme/               Theme provider ও toggle
     ui/                  পুনর্ব্যবহারযোগ্য UI component
   lib/                   Authentication setup, book type, API URL ও utility
+
+  
 🧰 চালানোর command
 npm run dev       # Development server চালু করুন
 npm run build     # Production build তৈরি ও যাচাই করুন
